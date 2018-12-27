@@ -27,10 +27,13 @@ def selectMenu():
             get_oldestFile(oldest)
             get_currentFile(current)
         elif option == 3:
+            getSizes()
             pass
         elif option == 4:
             pass
         elif option == 5:
+            sleep(1)
+            print("goodbye...........")
             break
 
 #create a folder
@@ -69,6 +72,13 @@ def get_currentFile(DirNam):
     print('The crrent file in: '+DirNam)
     os.system("cd {0} && ls -lt | head -n 2".format(DirNam))
 
+def getSizes():
+    s_dir = input("Ingrese nombre del directorio para consultar el archivo más pequeño: ")
+    b_dir = input("Ingrese nombre del directorio para consultar el archivo más grande: ")
 
+    s_file = os.popen('cd {0}/{1} &&  du -bhs * | sort -n | head -1'.format("UnixFile-Management-python",b_dir)).read()
+    print(s_file.split('\n')[0] + " --> Es el archivo más pequeño del directorio " + s_dir)
+    b_file = os.popen('cd {0}/{1} && du -bhs * | sort -nr | head -1'.format("UnixFile-Management-python",b_dir)).read()
+    print(b_file.split('\n')[0] + " --> Es el archivo más grande del directorio " + b_dir)
 
 
