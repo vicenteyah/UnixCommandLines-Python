@@ -8,8 +8,9 @@ def menu():
     -- MENU --> please type an option
     [ 1 ] - Create /copy files and directories
     [ 2 ] - Shows the oldest and most current file.
-    [ 3 ] - Concatenate 2 files( cp , cat)
-    [ 4 ] - leave
+    [ 3 ] - Show smaller and larger file
+    [ 4 ] - Concatenate 2 files( cp , cat)
+    [ 5 ] - leave
 
     """
     print(menu);
@@ -21,10 +22,15 @@ def selectMenu():
         if option == 1:
             createFiles_and_dirs()
         elif option == 2:
-            pass
+            oldest = input("please type the name od directory to know what is the oldest file: ")
+            current = input("please type the name of directory to consult the recent file: ")
+            get_oldestFile(oldest)
+            get_currentFile(current)
         elif option == 3:
             pass
         elif option == 4:
+            pass
+        elif option == 5:
             break
 
 #create a folder
@@ -54,6 +60,15 @@ def createFiles_and_dirs():
         createfile("DirB" + "/" + nameB + ".txt")
     
     
+def get_oldestFile(DirNam):
+    print("The oldest file in: "+DirNam)
+    os.system("cd {0} && ls -ltr | head -n 2".format(DirNam))
+
+
+def get_currentFile(DirNam):
+    print('The crrent file in: '+DirNam)
+    os.system("cd {0} && ls -lt | head -n 2".format(DirNam))
+
 
 
 
