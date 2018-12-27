@@ -10,7 +10,8 @@ def menu():
     [ 2 ] - Shows the oldest and most current file.
     [ 3 ] - Show smaller and larger file
     [ 4 ] - Concatenate 2 files( cp , cat)
-    [ 5 ] - leave
+    [ 5 ] - count letters 'b'  in a file
+    [ 6 ] - leave
 
     """
     print(menu);
@@ -28,10 +29,13 @@ def selectMenu():
             get_currentFile(current)
         elif option == 3:
             getSizes()
-            pass
         elif option == 4:
-            pass
+            file_x = input("type the name of file to copy text content")
+            file_y = input("type the name of file to concatenate the previous file content")
+            concatenate(file_x,file_y)
         elif option == 5:
+            pass
+        elif option == 6:
             sleep(1)
             print("goodbye...........")
             break
@@ -73,12 +77,16 @@ def get_currentFile(DirNam):
     os.system("cd {0} && ls -lt | head -n 2".format(DirNam))
 
 def getSizes():
-    s_dir = input("Ingrese nombre del directorio para consultar el archivo más pequeño: ")
-    b_dir = input("Ingrese nombre del directorio para consultar el archivo más grande: ")
+    s_dir = input("Type the directory to know the smallest file: ")
+    b_dir = input("Type the directory to know the bigest file: ")
 
     s_file = os.popen('cd {0}/{1} &&  du -bhs * | sort -n | head -1'.format("UnixFile-Management-python",b_dir)).read()
     print(s_file.split('\n')[0] + " --> Es el archivo más pequeño del directorio " + s_dir)
     b_file = os.popen('cd {0}/{1} && du -bhs * | sort -nr | head -1'.format("UnixFile-Management-python",b_dir)).read()
     print(b_file.split('\n')[0] + " --> Es el archivo más grande del directorio " + b_dir)
+
+def concatenate(fileX,fileY):
+    os.system(
+        'echo $(cat {0}/{1}) >> {0}/{2}'.format("DirA", fileX, fileY))
 
 
