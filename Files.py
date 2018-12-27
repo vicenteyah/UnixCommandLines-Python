@@ -81,9 +81,9 @@ def getSizes():
     b_dir = input("Type the directory to know the bigest file: ")
 
     s_file = os.popen('cd {0}/{1} &&  du -bhs * | sort -n | head -1'.format("UnixFile-Management-python",b_dir)).read()
-    print(s_file.split('\n')[0] + " --> Es el archivo más pequeño del directorio " + s_dir)
+    print(s_file.split('\n')[0] + " The smallest file in the directory " + s_dir)
     b_file = os.popen('cd {0}/{1} && du -bhs * | sort -nr | head -1'.format("UnixFile-Management-python",b_dir)).read()
-    print(b_file.split('\n')[0] + " --> Es el archivo más grande del directorio " + b_dir)
+    print(b_file.split('\n')[0] + " The biggest file in the directory " + b_dir)
 
 def concatenate(fileX,fileY):
     os.system(
