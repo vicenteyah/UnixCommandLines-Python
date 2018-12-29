@@ -23,7 +23,7 @@ def selectMenu():
         if option == 1:
             createFiles_and_dirs()
         elif option == 2:
-            oldest = input("please type the name od directory to know what is the oldest file: ")
+            oldest = input("please type the name of directory to know what is the oldest file: ")
             current = input("please type the name of directory to consult the recent file: ")
             get_oldestFile(oldest)
             get_currentFile(current)
@@ -76,6 +76,7 @@ def get_currentFile(DirNam):
     print('The crrent file in: '+DirNam)
     os.system("cd {0} && ls -lt | head -n 2".format(DirNam))
 
+
 def getSizes():
     s_dir = input("Type the directory to know the smallest file: ")
     b_dir = input("Type the directory to know the bigest file: ")
@@ -85,8 +86,14 @@ def getSizes():
     b_file = os.popen('cd {0}/{1} && du -bhs * | sort -nr | head -1'.format("UnixFile-Management-python",b_dir)).read()
     print(b_file.split('\n')[0] + " The biggest file in the directory " + b_dir)
 
+
 def concatenate(fileX,fileY):
     os.system(
         'echo $(cat {0}/{1}) >> {0}/{2}'.format("DirA", fileX, fileY))
 
+
+def  countLettersB(file , exp):
+    count = os.popen(
+        'grep -o -i {2} {0}/{1} | wc -l'.format("DirA", file, exp)).read()
+    print("Se encontraron {0} ocurrencias de '{1}' en {2}".format(count.split('\n')[0], exp, file))
 
