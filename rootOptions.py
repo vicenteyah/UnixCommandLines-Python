@@ -13,5 +13,6 @@ def changePermissions():
     sleep(2)
     print(".......Done!")
 
-def changeOwner():
-    
+def changeOwner(file):
+    owner_name = input("Escribe el nombre del nuevo PROPIETARIO: ")
+    subprocess.call(['sudo','chown', owner_name, "DirA"+'/'+file])
