@@ -1,20 +1,24 @@
 import lorem
 import os
 import subprocess
+from rootOptions import *
 from time import sleep
 
 def menu():
     menu ="""
     -- MENU --> please type an option
-    [ 1 ] - Create /copy files and directories
-    [ 2 ] - Shows the oldest and most current file.
-    [ 3 ] - Show smaller and larger file
-    [ 4 ] - Concatenate 2 files( cp , cat)
-    [ 5 ] - count letters 'b'  in a file
-    [ 6 ] - leave
+    [ 1 ] -> Create /copy files and directories
+    [ 2 ] -> Shows the oldest and most current file.
+    [ 3 ] -> Show smaller and larger file
+    [ 4 ] -> Concatenate 2 files( cp , cat)
+    [ 5 ] -> count letters 'b'  in a file
+    [ 6 ] -> Change permissions of a file to single execution
+    [ 7 ] -> Change owner of a file
+    [ 8 ] -> leave
 
     """
-    print(menu);
+    print(menu)
+
 
 def selectMenu():
     while True:
@@ -34,8 +38,15 @@ def selectMenu():
             file_y = input("type the name of file to concatenate the previous file content")
             concatenate(file_x,file_y)
         elif option == 5:
-            pass
+            file = input("Type the file Name: ")
+            exp = input("Type the word or letter to count: ")
+            countLetters(file, exp)
         elif option == 6:
+            changePermissions()
+        elif option == 7:
+            file = input("Type the name of the file to change owner: ")
+            changeOwner(file)
+        elif option == 8:
             sleep(1)
             print("goodbye...........")
             break
@@ -92,8 +103,8 @@ def concatenate(fileX,fileY):
         'echo $(cat {0}/{1}) >> {0}/{2}'.format("DirA", fileX, fileY))
 
 
-def  countLettersB(file , exp):
+def  countLetters(file , exp):
     count = os.popen(
         'grep -o -i {2} {0}/{1} | wc -l'.format("DirA", file, exp)).read()
-    print("Se encontraron {0} ocurrencias de '{1}' en {2}".format(count.split('\n')[0], exp, file))
+    print("{0} ocurrences were found '{1}' in {2}".format(count.split('\n')[0], exp, file))
 
